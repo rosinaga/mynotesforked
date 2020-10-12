@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mynotes</title>
+  </head>
+  <body>
+    <h1>Mynotes</h1>
+    <div class="topics">
+      {% for topic in topics_for_home %}
+        <div class="topic">
+          {{ topic.subject }}
+        </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
