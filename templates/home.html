@@ -6,10 +6,16 @@
   </head>
   <body>
     <h1>Mynotes</h1>
-    <div class="topics">
+    <div class="grid-container">
       {% for topic in topics_for_home %}
-        <div class="topic">
+        <div class="item1">
           {{ topic.subject }}
+        </div>
+        <div class="item2">
+          {{ topic.description }}
+        </div>
+        <div class="item3">
+          {{ topic.owner.first_name }}
         </div>
       {% endfor %}
     </div>

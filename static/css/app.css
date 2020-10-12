@@ -1,6 +1,14 @@
-.tag_div {
-  border: 2px solid #eee;
-  border-radius: 3px;
-  padding: 5px 0px;
-  margin: 5px
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grip-gap: 10px;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+.grid-container > div{
+  background-color: #eee;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 120%;
 }
