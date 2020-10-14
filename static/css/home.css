@@ -1,0 +1,43 @@
+body{
+  background-color: #f3f3f3;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  background-color: #ddd;
+  padding: 10px 5px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  font-size: 140%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 120px auto auto 70px;
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* All div elements inside grid-container: */
+.grid-container > div{
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.item1, .item2, .item3, .item4{
+  background-color: #eee;
+  font-size: 90%;
+  border-bottom: 3px solid #ccc;
+  color: #555;
+  overflow: hidden;
+}
+
+.topic_header{
+  background-color: #ccc;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 3px solid #bbb;
+}

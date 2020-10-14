@@ -1,22 +1,24 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Mynotes</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
   </head>
   <body>
-    <h1>Mynotes</h1>
+    <h1>My Notes By Topics</h1>
+
     <div class="grid-container">
+      <div class="topic_header">Topic</div>
+      <div class="topic_header">Description</div>
+      <div class="topic_header">Created by</div>
+      <div class="topic_header">Notes</div>
+
       {% for topic in topics_for_home %}
-        <div class="item1">
-          {{ topic.subject }}
-        </div>
-        <div class="item2">
-          {{ topic.description }}
-        </div>
-        <div class="item3">
-          {{ topic.owner.first_name }}
-        </div>
+        <div class="item1">{{ topic.subject }}</div>
+        <div class="item2">{{ topic.description }}</div>
+        <div class="item3">{{ topic.owner.first_name }}</div>
+        <div class="item4">0</div>
       {% endfor %}
     </div>
   </body>
