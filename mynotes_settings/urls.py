@@ -19,5 +19,7 @@ from notes import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='url_home')
+    path('', views.home, name='url_home'),
+    path('topics/', views.home, name='url_topics'),
+    path('topics/new', views.topic_new, name='url_topic_new ')
 ]
