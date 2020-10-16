@@ -11,14 +11,11 @@ def topic_new(request):
     if request.method == 'POST':
         subject = request.POST['subject']
         desc = request.POST['description']
-
-        user = User.objects.last()  # TODO: get the currently logged in user
-
+        user = User.objects.first()  # TODO: get the currently logged in user
         topic = Topic.objects.create(
             subject=subject,
             description=desc,
             owner=user
         )
-
         return redirect('url_topics')
     return render(request, 'topic_new.html')
