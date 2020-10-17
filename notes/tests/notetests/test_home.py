@@ -19,4 +19,4 @@ class HomeTestsNotLoggedIn(TestCase):
         self.url = reverse('url_home')
         self.response = self.client.get(self.url)
         self.assertContains(self.response,
-            '<div class="grid-container">', 1)
+            '<div class="grid">', 1)
