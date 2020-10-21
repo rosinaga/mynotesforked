@@ -12,7 +12,7 @@ h1 {
   font-size: 140%;
 }
 
-.grid-container {
+.grid {
   display: grid;
   grid-template-columns: 120px auto auto 70px;
   background-color: #ddd;
@@ -21,7 +21,7 @@ h1 {
 }
 
 /* All div elements inside grid-container: */
-.grid-container > div{
+.grid > div{
   border-radius: 5px;
   padding: 5px;
   margin: 2px;
