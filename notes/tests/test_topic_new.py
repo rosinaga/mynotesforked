@@ -9,6 +9,8 @@ class TopicTestsNewTopic(TestCase):
     def setUp(self):
         self.url = reverse('url_topic_new')
         self.response = self.client.get(self.url)
+        User.objects.create_user(
+            username='kalle', email='john@smith.com', password='123')
 
     def test_topic_new_view_status_code(self):
         self.assertEquals(self.response.status_code, 200)
@@ -22,3 +24,28 @@ class TopicTestsNewTopic(TestCase):
 
     def test_topic_new_check_csrf(self):
         self.assertContains(self.response, 'csrfmiddlewaretoken')
+
+    def test_topic_new_invalid_post_data(self):
+        data = {}
+        # Should not accept empty dictionary -> does not redirect.
+        response = self.client.post(self.url, data)
+        self.assertFalse(Topic.objects.exists())
+        self.assertEquals(response.status_code, 200)
+
+    def test_topic_new_invalid_post_data_empty_fields(self):
+        data = {
+            'subject':'',
+            'description':'',
+        }
+        # Should not accept empty values -> does not redirect.
+        response = self.client.post(self.url, data)
+        self.assertFalse(Topic.objects.exists())
+        self.assertEquals(response.status_code, 200)
+    
+    def test_topic_new_valid_post_data(self):
+        data = {
+            'subject': 'Some Good Title',
+            'description': 'Some nice description'
+        }
+        response = self.client.post(self.url, data)
+        self.assertTrue(Topic.objects.exists())
