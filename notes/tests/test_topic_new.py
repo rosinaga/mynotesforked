@@ -4,7 +4,7 @@ from django.test import TestCase
 from notes.views import topic_new
 from notes.models import Note, Topic
 
-# Tests with user not logged in:
+# Now using default user. Later must check if user logged in.
 class TopicTestsNewTopic(TestCase):
     def setUp(self):
         self.url = reverse('url_topic_new')
