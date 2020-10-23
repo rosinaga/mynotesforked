@@ -29,6 +29,7 @@ input, textarea {
 
 form{
   max-width: 800px;
+  margin: 0 5%;
 }
 
 .linkqueue {
@@ -86,4 +87,17 @@ a:hover {
   text-align: center;
   font-weight: bold;
   border-bottom: 3px solid #bbb;
+}
+
+.errorlist {
+  text-decoration: none;
+  color: red;
+  margin: 0 0 5px 0;
+  font-size: 90%;
+}
+.help {
+  margin-top: 5px;
+}
+.field_wrapper{
+  margin: 10px 0 10px 0;
 }

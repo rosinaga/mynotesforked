@@ -25,10 +25,23 @@
         </textarea>
       </div>
       <button type="submit">Submit</button>
-    </form>-->
+    </form>
     <form method="post" novalidate>
       {% csrf_token %}
       {{ topic_form.as_p }}
+      <button type="submit">Submit</button>
+    </form>-->
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in topic_form %}
+        <div class="field_wrapper">
+            {{ field.label_tag }} {{ field }}
+            {{ field.errors }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+      {% endfor %}
       <button type="submit">Submit</button>
     </form>
   </body>
