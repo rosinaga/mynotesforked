@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Note, Topic
+from notes.forms import NewTopicForm
+from notes.models import Note, Topic
 
 def home(request):
     alltopics = Topic.objects.all()
@@ -8,14 +9,14 @@ def home(request):
 
 # Handles both showing the form and saving the new topic:
 def topic_new(request):
+    user = User.objects.first()
     if request.method == 'POST':
-        subject = request.POST['subject']
-        desc = request.POST['description']
-        user = User.objects.first()  # TODO: get the currently logged in user
-        topic = Topic.objects.create(
-            subject=subject,
-            description=desc,
-            owner=user
-        )
-        return redirect('url_topics')
-    return render(request, 'topic_new.html')
+        form = NewTopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.owner = user
+            topic.save()
+            return redirect('url_topics')
+    else:
+        form = NewTopicForm()
+    return render(request, 'topic_new.html', {'topic_form': form})

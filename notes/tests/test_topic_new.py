@@ -19,6 +19,10 @@ class TopicTestsNewTopic(TestCase):
         method_to_serve_url = resolve('/topics/new').func
         self.assertEquals(method_to_serve_url, topic_new)
 
+    def test_topic_new_navigation_links(self):
+        url_home = reverse('url_home')
+        self.assertContains(self.response, 'href="{0}"'.format(url_home))
+
     def test_topic_new_view_form_exists(self):
         self.assertContains(self.response,'<form ', 1)
 
@@ -41,7 +45,7 @@ class TopicTestsNewTopic(TestCase):
         response = self.client.post(self.url, data)
         self.assertFalse(Topic.objects.exists())
         self.assertEquals(response.status_code, 200)
-    
+
     def test_topic_new_valid_post_data(self):
         data = {
             'subject': 'Some Good Title',
