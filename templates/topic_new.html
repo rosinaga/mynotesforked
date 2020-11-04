@@ -13,24 +13,6 @@
       New topic
     </div>
 
-    <!--<form method="post">
-      {% csrf_token %}
-      <div>
-        <label for="id_subject">Subject</label>
-        <input type="text" id="id_subject" name="subject">
-      </div>
-      <div>
-        <label for="id_description">Description</label>
-        <textarea class="" id="id_description" name="description" rows="5">
-        </textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-    <form method="post" novalidate>
-      {% csrf_token %}
-      {{ topic_form.as_p }}
-      <button type="submit">Submit</button>
-    </form>-->
     <form method="post" novalidate>
       {% csrf_token %}
       {% for field in topic_form %}
