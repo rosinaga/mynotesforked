@@ -16,10 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from notes import views
+from accounts import views as accounts_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='url_home'),
     path('topics/', views.home, name='url_topics'),
     path('topics/new', views.topic_new, name='url_topic_new')
+
+    # Accounts:===============================================
+    path('signup/',
+        accounts_views.SignUpView.as_view(template_name='signup.html'),
+        name='url_signup'
+    ),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'),
+        name='url_login'
+    ),
+    path('logout/', auth_views.LogoutView.as_view(template_name='home.html'),
+        name='url_logout'
+    ),
+    path('settings/account/',
+        accounts_views.UserUpdateView.as_view(),
+        name='url_my_account'
+    ),
 ]

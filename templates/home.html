@@ -11,6 +11,11 @@
     <div class="linkqueue">
       Home
     </div>
+    {% if user.is_authenticated %}
+      Logged in user: {{user.username}}
+    {% else %}
+      <a href="{% url 'url_login' %}" >Login</a>
+    {% endif %}
 
     <div id="navbar">
       <a href="{% url 'url_topic_new' %}" >Add topic</a>
