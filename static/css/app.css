@@ -97,6 +97,8 @@ a:hover {
 }
 .help {
   margin-top: 5px;
+  font-size: 90%;
+  color: #777;
 }
 .field_wrapper{
   margin: 10px 0 10px 0;
