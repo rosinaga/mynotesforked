@@ -10,12 +10,12 @@
     <h1>Signup</h1>
     <div class="linkqueue">
       <a href="{% url 'url_home' %}">Home</a> >
-      New topic
+      Signup
     </div>
 
     <form method="post" novalidate>
       {% csrf_token %}
-      {% for field in topic_form %}
+      {% for field in signup_form %}
         <div class="field_wrapper">
             {{ field.label_tag }} {{ field }}
             {{ field.errors }}

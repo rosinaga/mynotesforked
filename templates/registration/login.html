@@ -14,7 +14,7 @@
 
     <form method="post" novalidate>
       {% csrf_token %}
-      {% for field in topic_form %}
+      {% for field in form %}
         <div class="field_wrapper">
             {{ field.label_tag }} {{ field }}
             {{ field.errors }}

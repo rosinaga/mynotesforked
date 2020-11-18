@@ -11,12 +11,15 @@
     <div class="linkqueue">
       Home
     </div>
-    {% if user.is_authenticated %}
-      Logged in user: {{user.username}}
-    {% else %}
-      <a href="{% url 'url_login' %}" >Login</a>
-    {% endif %}
-
+    <div id="user">
+      {% if user.is_authenticated %}
+        Logged in user: {{user.username}}
+        <a href="{% url 'logout' %}" >Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" >Login</a>
+        <a href="{% url 'url_signup' %}" >Signup</a>
+      {% endif %}
+    </div>
     <div id="navbar">
       <a href="{% url 'url_topic_new' %}" >Add topic</a>
     </div>
@@ -30,7 +33,7 @@
       {% for topic in topics_for_home %}
         <div class="item1">{{ topic.subject }}</div>
         <div class="item2">{{ topic.description }}</div>
-        <div class="item3">{{ topic.owner.first_name }}</div>
+        <div class="item3">{{ topic.owner.username }}</div>
         <div class="item4">0</div>
       {% endfor %}
     </div>
