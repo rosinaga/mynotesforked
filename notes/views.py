@@ -9,14 +9,17 @@ def home(request):
 
 # Handles both showing the form and saving the new topic:
 def topic_new(request):
-    user = User.objects.first()
-    if request.method == 'POST':
-        form = NewTopicForm(request.POST)
-        if form.is_valid():
-            topic = form.save(commit=False)
-            topic.owner = user
-            topic.save()
-            return redirect('url_topics')
+    user = request.user # Gives you the currently logged-in user.
+    if user.is_authenticated:
+        if request.method == 'POST':
+            form = NewTopicForm(request.POST)
+            if form.is_valid():
+                topic = form.save(commit=False)
+                topic.owner = user
+                topic.save()
+                return redirect('url_topics')
+        else:
+            form = NewTopicForm()
+        return render(request, 'topic_new.html', {'topic_form': form})
     else:
-        form = NewTopicForm()
-    return render(request, 'topic_new.html', {'topic_form': form})
+        return redirect('login')

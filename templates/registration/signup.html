@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8" name="viewport"
       content="width=device-width, initial-scale=1.0">
-    <title>Mynotes</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
   </head>
   <body>
-    <h1>My Notes</h1>
+    <h1>Signup</h1>
     <div class="linkqueue">
       <a href="{% url 'url_home' %}">Home</a> >
-      New topic
+      Signup
     </div>
 
     <form method="post" novalidate>
       {% csrf_token %}
-      {% for field in topic_form %}
+      {% for field in signup_form %}
         <div class="field_wrapper">
             {{ field.label_tag }} {{ field }}
             {{ field.errors }}
