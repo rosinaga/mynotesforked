@@ -37,7 +37,6 @@ def topic_edit(request, topic_id):
             if request.method == 'POST':
                 form = EditTopicForm(request.POST)
                 if form.is_valid():
-                    topic = form.save()
                     return redirect('url_topics')
             else:
                 form = EditTopicForm()
