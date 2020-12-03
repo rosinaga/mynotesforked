@@ -27,13 +27,17 @@
     <div class="grid">
       <div class="topic_header">Topic</div>
       <div class="topic_header">Description</div>
-      <div class="topic_header">Created by</div>
+      <div class="topic_header">Actions</div>
       <div class="topic_header">Notes</div>
 
       {% for topic in topics_for_home %}
         <div class="item1">{{ topic.subject }}</div>
-        <div class="item2">{{ topic.description }}</div>
-        <div class="item3">{{ topic.owner.username }}</div>
+        <div class="item2">
+          {{ topic.description }} [{{ topic.owner.username }}]
+        </div>
+        <div class="item3">
+          <a href="{% url 'url_topic_edit' topic.pk %}">Edit</a>
+        </div>
         <div class="item4">0</div>
       {% endfor %}
     </div>
