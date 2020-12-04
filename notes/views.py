@@ -31,15 +31,18 @@ def topic_edit(request, topic_id):
     user = request.user
     if user.is_authenticated:
         topic = get_object_or_404(Topic, pk=topic_id)
-        if topic.owner != user: # Important!
+        if topic.owner != user: # Important - others must not be able to edit!
             return HttpResponseForbidden()
         else:
             if request.method == 'POST':
-                form = EditTopicForm(request.POST)
+                # Instance=topic links the form to the current topic.
+                form = EditTopicForm(request.POST, instance=topic)
                 if form.is_valid():
+                    topic.save()
                     return redirect('url_topics')
             else:
-                form = EditTopicForm()
+                # Returns the form with the current values:
+                form = EditTopicForm(instance=topic)
         return render(request, 'topic_edit.html', {'topic_form': form})
     else:
         return redirect('login')

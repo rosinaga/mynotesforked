@@ -12,7 +12,7 @@ class NewTopicForm(forms.ModelForm):
         fields = ['subject', 'description']
 
 # As you can see, we could use NewTopicForm as well. They are similar. Often
-# new and edit use the same form but in same cases different ones are needed.
+# new and edit methods use the same form but in same cases different ones are needed.
 class EditTopicForm(forms.ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(),
