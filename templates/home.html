@@ -36,7 +36,9 @@
           {{ topic.description }} [{{ topic.owner.username }}]
         </div>
         <div class="item3">
-          <a href="{% url 'url_topic_edit' topic.pk %}">Edit</a>
+          {% if topic.owner == user %}
+            <a href="{% url 'url_topic_edit' topic.pk %}">Edit</a>
+          {% endif %}
         </div>
         <div class="item4">0</div>
       {% endfor %}

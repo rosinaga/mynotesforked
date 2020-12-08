@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
 from django.utils import timezone
 from django.contrib.auth.models import User
 from notes.forms import NewTopicForm, EditTopicForm
