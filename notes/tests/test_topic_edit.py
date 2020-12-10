@@ -22,7 +22,7 @@ class TopicTestsEditTopic(TestCase):
             subject='Subject2', description='Desc2', owner=self.user2)
         self.topic1 = Topic.objects.get(subject="Subject1");
         self.topic2 = Topic.objects.get(subject="Subject2");
-        self.url = reverse('url_topic_edit' kwargs={'pk': self.topic.pk})
+        self.url = reverse('url_topic_edit', kwargs={'topic_id': self.topic1.pk})
         self.response = self.client.get(self.url)
 
     def test_topic_edit_view_status_code(self):
@@ -30,7 +30,7 @@ class TopicTestsEditTopic(TestCase):
 
     def test_topic_edit_url_resolves_correct_method(self):
         method_to_serve_url = resolve('/topics/1/edit').func
-        self.assertEquals(method_to_serve_url, topic_new)
+        self.assertEquals(method_to_serve_url, topic_edit)
 
     def test_topic_edit_navigation_links(self):
         url_home = reverse('url_home')
@@ -66,3 +66,34 @@ class TopicTestsEditTopic(TestCase):
         }
         response = self.client.post(self.url, data)
         self.assertTrue(Topic.objects.exists())
+
+class TopicTestsEditTopic_Hacker(TestCase):
+    def setUp(self):
+        User.objects.create_user(
+            username='kalle', email='john@smith.com', password='123')
+        User.objects.create_user(
+            username='eila', email='eila@smith.com', password='456')
+        self.user1 = User.objects.get(username="kalle")
+
+        # eila is the logged in user:
+        self.client.login(username='eila', password='456')
+        # The topic owner is kalle:
+        Topic.objects.create(
+            subject='Subject1', description='Desc1', owner=self.user1)
+        self.topic1 = Topic.objects.get(subject="Subject1");
+        self.url = reverse('url_topic_edit', kwargs={'topic_id': self.topic1.pk})
+        self.response = self.client.get(self.url)
+
+    def test_topic_edit_by_hacker_redirect(self):
+        home_url = reverse('url_home')
+        self.assertRedirects(self.response, home_url)
+
+    def test_topic_edit_valid_post_data_by_hacker(self):
+        data = {
+            'subject': 'hacker_work',
+            'description': 'Some nice description'
+        }
+        response = self.client.post(self.url, data)
+
+        # Should be the original:
+        self.assertTrue(self.topic1.subject == "Subject1")
