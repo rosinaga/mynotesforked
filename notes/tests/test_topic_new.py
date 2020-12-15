@@ -4,13 +4,34 @@ from django.test import TestCase
 from notes.views import topic_new
 from notes.models import Note, Topic
 
-# Now using default user. Later must check if user logged in.
-class TopicTestsNewTopic(TestCase):
+# Checks if user is redirected to login page if not logged in.
+class TopicTestsNewTopicUserNotLoggedIn(TestCase):
     def setUp(self):
         self.url = reverse('url_topic_new')
         self.response = self.client.get(self.url)
         User.objects.create_user(
             username='kalle', email='john@smith.com', password='123')
+
+    def test_topic_new_view_status_code_user_not_logged_in(self):
+        self.assertEquals(self.response.status_code, 302)
+
+    def test_topic_new_view_redirect_user_not_logged_in(self):
+        url = reverse('login')
+        self.assertRedirects(self.response, url)
+
+
+class TopicTestsNewTopicUserLoggedIn(TestCase):
+    def setUp(self):
+        User.objects.create_user(
+            username='kalle', email='john@smith.com', password='123')
+        User.objects.create_user(
+            username='eila', email='eila@smith.com', password='456')
+        self.user1 = User.objects.get(username="kalle")
+        self.user2 = User.objects.get(username="eila")
+        # kalle is the logged in user:
+        self.client.login(username='kalle', password='123')
+        self.url = reverse('url_topic_new')
+        self.response = self.client.get(self.url)
 
     def test_topic_new_view_status_code(self):
         self.assertEquals(self.response.status_code, 200)
