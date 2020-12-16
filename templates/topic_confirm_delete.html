@@ -1,0 +1,28 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" name="viewport"
+      content="width=device-width, initial-scale=1.0">
+    <title>Mynotes</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  </head>
+  <body>
+    <h1>My Notes</h1>
+    <div class="linkqueue">
+      <a href="{% url 'url_home' %}">Home</a> >
+      Delete topic
+    </div>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <div class="">
+        <p>Do you really want to delete this topic?</p>
+        <p>Subject: <b>{{topic.subject}}</b></p>
+        <p>Cescription: <b>{{topic.description}}</b></p>
+        <p>If yes, click on the button!</p>
+      </div>
+      <button type="submit">Confirm delete</button>
+      <p><a href="{% url 'url_topics' %}">Cancel</a></p>
+    </form>
+  </body>
+</html>

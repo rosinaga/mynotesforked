@@ -47,3 +47,17 @@ def topic_edit(request, topic_id):
         return render(request, 'topic_edit.html', {'topic_form': form})
     else:
         return redirect('login')
+
+def topic_delete(request, topic_id):
+    user = request.user
+    if user.is_authenticated:
+        topic = get_object_or_404(Topic, pk=topic_id)
+        if topic.owner != user: # Important - others must not be able to delete!
+            return HttpResponseForbidden()
+        else:
+            if request.method == 'POST':
+                topic.delete()
+                return redirect('url_topics')
+        return render(request, 'topic_confirm_delete.html', {'topic': topic})
+    else:
+        return redirect('login')

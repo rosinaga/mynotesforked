@@ -24,6 +24,7 @@ urlpatterns = [
     path('topics/', views.home, name='url_topics'),
     path('topics/new', views.topic_new, name='url_topic_new'),
     path('topics/<int:topic_id>/edit/', views.topic_edit, name='url_topic_edit'),
+    path('topics/<int:topic_id>/delete/', views.topic_delete, name='url_topic_delete'),
 
     # Accounts:===============================================
     path('signup/',accounts_views.signup,name='url_signup'),

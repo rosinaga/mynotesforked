@@ -4,8 +4,25 @@ from django.test import TestCase
 from notes.views import topic_new
 from notes.models import Note, Topic
 
-# Now using default user. Later must check if user logged in.
-# KESKEN
+# Checks if user is redirected to login page if not logged in.
+class TopicTestsEditTopicUserNotLoggedIn(TestCase):
+    def setUp(self):
+        User.objects.create_user(
+            username='kalle', email='john@smith.com', password='123')
+        self.user1 = User.objects.get(username="kalle")
+        Topic.objects.create(
+            subject='Subject1', description='Desc1', owner=self.user1)
+        self.topic1 = Topic.objects.get(subject="Subject1");
+        self.url = reverse('url_topic_edit', kwargs={'topic_id': self.topic1.pk})
+        self.response = self.client.get(self.url)
+
+    def test_topic_new_view_status_code_user_not_logged_in(self):
+        self.assertEquals(self.response.status_code, 302)
+
+    def test_topic_new_view_redirect_user_not_logged_in(self):
+        url = reverse('login')
+        self.assertRedirects(self.response, url)
+
 class TopicTestsEditTopic(TestCase):
     def setUp(self):
         User.objects.create_user(
@@ -46,8 +63,7 @@ class TopicTestsEditTopic(TestCase):
         data = {}
         # Should not accept empty dictionary -> does not redirect.
         response = self.client.post(self.url, data)
-        self.assertFalse(Topic.objects.exists())
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(self.topic1.subject, "Subject1")
 
     def test_topic_edit_invalid_post_data_empty_fields(self):
         data = {
@@ -56,16 +72,16 @@ class TopicTestsEditTopic(TestCase):
         }
         # Should not accept empty values -> does not redirect.
         response = self.client.post(self.url, data)
-        self.assertFalse(Topic.objects.exists())
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(self.topic1.subject, "Subject1")
 
     def test_topic_edit_valid_post_data(self):
         data = {
             'subject': 'Some Good Title',
-            'description': 'Some nice description'
+            'description': 'Some nice description',
         }
         response = self.client.post(self.url, data)
-        self.assertTrue(Topic.objects.exists())
+        self.assertEquals(self.topic1.subject, 'Some Good Title')
+        self.assertEquals(self.topic1.description, 'Some nice description')
 
 class TopicTestsEditTopic_Hacker(TestCase):
     def setUp(self):
@@ -96,4 +112,4 @@ class TopicTestsEditTopic_Hacker(TestCase):
         response = self.client.post(self.url, data)
 
         # Should be the original:
-        self.assertTrue(self.topic1.subject == "Subject1")
+        self.assertEquals(self.topic1.subject,"Subject1")

@@ -38,6 +38,7 @@
         <div class="item3">
           {% if topic.owner == user %}
             <a href="{% url 'url_topic_edit' topic.pk %}">Edit</a>
+            <a href="{% url 'url_topic_delete' topic.pk %}">Delete</a>
           {% endif %}
         </div>
         <div class="item4">0</div>
