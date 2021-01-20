@@ -1,5 +1,5 @@
 from django import forms
-from notes.models import Topic
+from notes.models import Topic, Note
 
 class NewTopicForm(forms.ModelForm):
     description = forms.CharField(
@@ -22,3 +22,9 @@ class EditTopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ['subject', 'description']
+
+# This is very simple:
+class NoteForm(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields = ['subject', 'content']

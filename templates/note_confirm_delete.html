@@ -7,24 +7,22 @@
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
   </head>
   <body>
-    <h1>New Topic</h1>
+    <h1>Confirm Delete</h1>
     <div class="linkqueue">
       <a href="{% url 'url_home' %}">Home</a> >
-      New topic
+      Delete Note
     </div>
 
     <form method="post" novalidate>
       {% csrf_token %}
-      {% for field in topic_form %}
-        <div class="field_wrapper">
-            {{ field.label_tag }} {{ field }}
-            {{ field.errors }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
-      {% endfor %}
-      <button type="submit">Submit</button>
+      <div class="">
+        <p>Do you really want to delete this note?</p>
+        <p>Subject: <b>{{note.subject}}</b></p>
+        <p>Content: <b>{{note.content}}</b></p>
+        <p>If yes, click on the button!</p>
+      </div>
+      <button type="submit">Confirm delete</button>
+      <p><a href="{% url 'url_note_list' note.topic.pk%}">Cancel</a></p>
     </form>
   </body>
 </html>

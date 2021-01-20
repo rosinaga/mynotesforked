@@ -9,7 +9,8 @@
   <body>
     <h1>My Notes</h1>
     <div class="linkqueue">
-      Home
+      <a href="{% url 'url_home' %}">Home</a> > Topic: {{topic.subject}} >
+      Notes
     </div>
     <div id="user">
       {% if user.is_authenticated %}
@@ -21,28 +22,26 @@
       {% endif %}
     </div>
     <div id="navbar">
-      <a href="{% url 'url_topic_new' %}" >Add topic</a>
+      <a href="{% url 'url_note_new' topic.pk%}" >Add note</a>
     </div>
 
-    <div class="grid">
-      <div class="topic_header">Topic</div>
-      <div class="topic_header">Description</div>
-      <div class="topic_header">Actions</div>
-      <div class="topic_header">Notes</div>
+    <div class="grid_notes">
+      <div class="notes_header">Subject</div>
+      <div class="notes_header">Content</div>
+      <div class="notes_header">Actions</div>
 
-      {% for topic in topics_for_home %}
-        <div class="item1">{{ topic.subject }}</div>
+      {% for note in notes %}
+        <div class="item1">
+          {{ note.subject}} [{{ note.owner.username }}, {{ note.updated_at }}]
+        </div>
         <div class="item2">
-          {{ topic.description }} [{{ topic.owner.username }}]
+          {{ note.content }} 
         </div>
         <div class="item3">
-          {% if topic.owner == user %}
-            <a href="{% url 'url_topic_edit' topic.pk %}">Edit</a>
-            <a href="{% url 'url_topic_delete' topic.pk %}">Delete</a>
+          {% if note.owner == user %}
+            <a href="{% url 'url_note_edit' note.topic.pk note.pk %}">Edit</a>
+            <a href="{% url 'url_note_delete' note.topic.pk note.pk%}">Delete</a>
           {% endif %}
-        </div>
-        <div class="item4">{{topic.notes_number}} 
-          <a href="{% url 'url_note_list' topic.pk%}">Show</a>
         </div>
       {% endfor %}
     </div>

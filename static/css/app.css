@@ -66,9 +66,21 @@ a:hover {
   padding: 5px;
   border-radius: 5px;
 }
+.grid_notes {
+  display: grid;
+  grid-template-columns: 200px auto 200px;
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
 
 /* All div elements inside grid-container: */
 .grid > div{
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+.grid_notes > div{
   border-radius: 5px;
   padding: 5px;
   margin: 2px;
@@ -82,7 +94,7 @@ a:hover {
   overflow: hidden;
 }
 
-.topic_header{
+.topic_header, .notes_header{
   background-color: #ccc;
   text-align: center;
   font-weight: bold;

@@ -26,6 +26,13 @@ urlpatterns = [
     path('topics/<int:topic_id>/edit/', views.topic_edit, name='url_topic_edit'),
     path('topics/<int:topic_id>/delete/', views.topic_delete, name='url_topic_delete'),
 
+    path('topics/<int:topic_id>/notes', views.note_list, name='url_note_list'),
+    path('topics/<int:topic_id>/notes/new', views.note_new, name='url_note_new'),
+    path('topics/<int:topic_id>/notes/<int:note_id>/edit', \
+        views.note_edit, name='url_note_edit'),
+    path('topics/<int:topic_id>/notes/<int:note_id>/delete', \
+        views.note_delete, name='url_note_delete'),
+
     # Accounts:===============================================
     path('signup/',accounts_views.signup,name='url_signup'),
     path('accounts/', include('django.contrib.auth.urls')),

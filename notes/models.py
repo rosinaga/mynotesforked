@@ -17,4 +17,4 @@ class Note(models.Model):
         User, on_delete=models.CASCADE, related_name='notes'
     )
     topic = models.ForeignKey(
-        Topic, on_delete=models.CASCADE, related_name='topics')
+        Topic, on_delete=models.CASCADE, related_name='notes')
