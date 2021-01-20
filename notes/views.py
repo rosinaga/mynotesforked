@@ -33,7 +33,7 @@ def topic_edit(request, topic_id):
     if user.is_authenticated:
         topic = get_object_or_404(Topic, pk=topic_id)
         if topic.owner != user: # Important - others must not be able to edit!
-            return HttpResponseForbidden()
+            return HttpResponseForbidden() # Returns the 403 status code.
         else:
             if request.method == 'POST':
                 # Instance=topic links the form to the current topic.

@@ -7,10 +7,9 @@ Django project for teaching the basics
 * step3: static/css added, tests begun.
 * step4: create new topic implemented, the form done manually (no validation).
 * step5: forms.modelForm taken into use, validation ok, error messages made nice.
+* step6: edit and delete topic implemented -> CRUD ok for topic (tests for delete not yet done).
 
 ## TODO:
-* user login, check if user logged in in views.
 * managing personal details (user)
-* edit topic
-* delete topic
 * CRUD of note
+* testing
