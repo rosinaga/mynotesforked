@@ -8,8 +8,8 @@ Django project for teaching the basics of Django projects.
 * step4: create new topic implemented, the form done manually (no validation).
 * step5: forms.modelForm taken into use, validation ok, error messages made nice.
 * step6: edit and delete topic implemented -> CRUD ok for topic (tests ok). Signup, login and logout ok.
-* step7: add and show notes
+* step7: CRUD of notes ok. Basic implementation, no tests.
 
 ## TODO:
 * managing personal details (user)
-* CRUD of note
+* ameliorate usability and looks
