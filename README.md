@@ -1,5 +1,5 @@
 # mynotes
-Django project for teaching the basics
+Django project for teaching the basics of Django projects.
 
 ## Steps as branches:
 * step1: browser shows "Hello, World". No models, no db, no templates.
@@ -7,10 +7,9 @@ Django project for teaching the basics
 * step3: static/css added, tests begun.
 * step4: create new topic implemented, the form done manually (no validation).
 * step5: forms.modelForm taken into use, validation ok, error messages made nice.
-* step6: edit and delete topic implemented -> CRUD ok for topic (tests for delete not yet done). Signup, login and logout ok.
+* step6: edit and delete topic implemented -> CRUD ok for topic (tests ok). Signup, login and logout ok.
 * step7: add and show notes
 
 ## TODO:
 * managing personal details (user)
 * CRUD of note
-* testing

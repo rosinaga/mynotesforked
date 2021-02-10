@@ -12,10 +12,10 @@ class TopicTestsNewTopicUserNotLoggedIn(TestCase):
         User.objects.create_user(
             username='kalle', email='john@smith.com', password='123')
 
-    def test_topic_new_view_status_code_user_not_logged_in(self):
+    def test_topic_new_status_code_user_not_logged_in(self):
         self.assertEquals(self.response.status_code, 302)
 
-    def test_topic_new_view_redirect_user_not_logged_in(self):
+    def test_topic_new_redirect_user_not_logged_in(self):
         url = reverse('login')
         self.assertRedirects(self.response, url)
 
@@ -33,7 +33,7 @@ class TopicTestsNewTopicUserLoggedIn(TestCase):
         self.url = reverse('url_topic_new')
         self.response = self.client.get(self.url)
 
-    def test_topic_new_view_status_code(self):
+    def test_topic_new_status_code(self):
         self.assertEquals(self.response.status_code, 200)
 
     def test_topic_new_url_resolves_correct_method(self):
@@ -44,7 +44,7 @@ class TopicTestsNewTopicUserLoggedIn(TestCase):
         url_home = reverse('url_home')
         self.assertContains(self.response, 'href="{0}"'.format(url_home))
 
-    def test_topic_new_view_form_exists(self):
+    def test_topic_new_form_exists(self):
         self.assertContains(self.response,'<form ', 1)
 
     def test_topic_new_check_csrf(self):
